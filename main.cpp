@@ -21,6 +21,26 @@ int cursorY = 1;
 int TILE_WIDTH = 0;
 int TILE_HEIGHT = 0;
 
+double lastTime = 0;
+bool gameWon = false;
+
+void resetGame() {
+    int initialMap[MAP_HEIGHT][MAP_WIDTH] = {
+        {1, 1, 4},
+        {4, 1, 4},
+        {4, 4, 1}
+    };
+    for (int y = 0; y < MAP_HEIGHT; ++y) {
+        for (int x = 0; x < MAP_WIDTH; ++x) {
+            tilemap[y][x] = initialMap[y][x];
+        }
+    }
+    cursorX = 1;
+    cursorY = 1;
+    gameWon = false;
+    lastTime = glfwGetTime();
+}
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         if (key == GLFW_KEY_W) {
@@ -33,6 +53,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             if (cursorX > 0) { cursorX--; }
         } else if (key == GLFW_KEY_SPACE) { // altera tile
             tilemap[cursorY][cursorX] = (tilemap[cursorY][cursorX] + 1) % SPRITESHEET_TILES_X;
+        } else if (key == GLFW_KEY_ESCAPE) {
+            resetGame();
         }
     }
 }
@@ -142,8 +164,8 @@ int main() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    double lastTime = glfwGetTime();
-    bool gameWon = false;
+    lastTime = glfwGetTime();
+    gameWon = false;
 
     while (!glfwWindowShouldClose(window)) {
         double currentTime = glfwGetTime();
