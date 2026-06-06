@@ -7,4 +7,4 @@ Um projeto utilizando OpenGL para renderização de mapas de tiles (tilemaps) co
 - Carregamento de spritesheets usando `stb_image`.
 - Movimentação de cursor (W, A, S, D).
 - Alteração dinâmica de tiles (Barra de Espaço).
-
+- Reset do jogo (Esc).
