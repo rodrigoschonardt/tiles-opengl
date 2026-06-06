@@ -10,19 +10,15 @@ const int MAP_HEIGHT = 3;
 const int SPRITESHEET_TILES_X = 7;
 const int SPRITESHEET_TILES_Y = 1;
 
-int tilemap[MAP_HEIGHT][MAP_WIDTH] = {
-    {1, 1, 4},
-    {4, 1, 4},
-    {4, 4, 1}
-};
+int tilemap[MAP_HEIGHT][MAP_WIDTH];
 
-int cursorX = 1;
-int cursorY = 1;
+int cursorX;
+int cursorY;
 int TILE_WIDTH = 0;
 int TILE_HEIGHT = 0;
 
-double lastTime = 0;
-bool gameWon = false;
+double lastTime;
+bool gameWon;
 
 void resetGame() {
     int initialMap[MAP_HEIGHT][MAP_WIDTH] = {
@@ -164,8 +160,7 @@ int main() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    lastTime = glfwGetTime();
-    gameWon = false;
+    resetGame();
 
     while (!glfwWindowShouldClose(window)) {
         double currentTime = glfwGetTime();
